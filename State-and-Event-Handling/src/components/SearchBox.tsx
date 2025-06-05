@@ -20,7 +20,7 @@ const SearchBox = () => {
 
   return (
     <>
-        <div className='mx-12 border h-full px-6 py-4 rounded-lg'>
+        <div className='mx-12 border h-auto px-6 py-4 rounded-lg'>
             <span> Search box:</span> <br/>
             <input
             type='text'
