@@ -1,26 +1,21 @@
+import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import './App.css'
 import BookGenre from './components/BookGenre'
 import BookList from './components/BookList'
 import WelcomeMessage from './components/WelcomeMessage'
+import ListRendererImplements from './components/ListRendererImplements'
 
 function App() {
 
   return (
-    <>
-      <div className='flex justify-between'>
-        <div className='w-1/2'>
-          <WelcomeMessage/>
-
-          <BookList/>
-        </div>
-
-        <div className='w-1/2'>
-          <BookGenre/>
-        </div>
-      </div>
-      
-
-    </>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<WelcomeMessage/>} />
+          <Route path='/booklist' element={<BookList/>} />
+          <Route path='/bookgenre' element={<BookGenre/>} />
+          <Route path='/renderList' element={<ListRendererImplements/>} />
+        </Routes>
+      </BrowserRouter>
   )
 }
 
