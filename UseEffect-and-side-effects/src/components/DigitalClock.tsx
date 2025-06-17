@@ -39,7 +39,12 @@ const DigitalClock: React.FC<ClockProps> = ({
             <span className='font-bold text-4xl text-gray-900 mb-5'> My Clock </span>
             <div className=" bg-gray-900 text-green-400 font-mono p-6 rounded-lg shadow-lg border-2 border-green-500 inline-block text-center">
                 <div className="text-sm mb-1">
-                    {time.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    {time.toLocaleDateString(undefined, { //undefined 
+                        weekday: 'long', //Display full name of day
+                        year: 'numeric', //Full year as number
+                        month: 'long', //Display full month name
+                        day: 'numeric' //display the day as number 
+                        })} 
                 </div>
                 <div className="text-4xl font-bold">
                     {formatTime()}
