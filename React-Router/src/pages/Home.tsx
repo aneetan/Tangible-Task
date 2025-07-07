@@ -1,10 +1,8 @@
 import { useAuth } from '../hooks/useAuth';
 import PostComponent from '../components/PostComponent';
 
-
-
 const Home = () => {
-    const {user, role, logout} = useAuth();
+    const {user, logout} = useAuth();
     
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -14,14 +12,10 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row items-center justify-between">
                 <div className="flex items-center">
                 <div className="text-center sm:text-left">
-                    <h1 className="text-2xl font-bold text-gray-900">Welcome, {user}</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">Welcome, {user?.username}</h1>
                     <div className="flex items-center justify-center sm:justify-start mt-1">
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                        role === 'admin' 
-                        ? 'bg-purple-100 text-purple-800' 
-                        : 'bg-blue-100 text-blue-800'
-                    }`}>
-                        {role}
+                    <span className='px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800'>
+                        {user?.role}
                     </span>
                     </div>
                 </div>

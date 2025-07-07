@@ -5,9 +5,9 @@ const Login = () => {
   const {username, password, setUsername, setPassword, role, setRole, login} = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    login();
-    navigate("/home")
+  const handleLogin = (e:React.FormEvent) => {
+    e.preventDefault();
+    login(username, role as 'Admin' | 'User');
   }
 
   return (
@@ -55,7 +55,7 @@ const Login = () => {
                 name="role"
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 value={role}
-                onChange={(e) => setRole(e.target.value)}
+                onChange={(e) => setRole(e.target.value as "Admin" | "User")}
               >
                 <option value="" disabled>Select a role</option>
                 <option value="Admin">Admin</option>
