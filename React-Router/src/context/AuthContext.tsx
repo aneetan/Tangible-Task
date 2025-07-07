@@ -1,7 +1,7 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router";
 
-type Role = 'Admin' | 'User' | ''; 
+type Role = 'Admin' | 'User'; 
 
 type User = {
     role: Role;
@@ -36,11 +36,20 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
     const [role, setRole] = useState<Role>("User");
     const navigate = useNavigate();
 
+     useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const parsedUser = JSON.parse(storedUser);
+            if (parsedUser?.role && parsedUser?.username) {
+                setUser(parsedUser);
+            }
+        }
+    }, []);
+
     const login = (username: string, role: Role) => {
-        setRole(role);
         const userData = { 
           username,
-          role: role  
+          role  
         };
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
@@ -64,8 +73,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
         setUser(null);
         setUsername("");
         setPassword("");
-        setRole("");
-        navigate("/");
+        navigate("/");  
     }
 
     return(
