@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { PostProps } from '../data/post'
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
 
 const PostComponent = () => {
   const [post, setPost] = useState<PostProps[]>([]);
+  const navigate = useNavigate();
+
+  const readMore = (id: number) => {
+      navigate(`/post/${id}`)
+  }
 
   useEffect(() => {
     import('../data/post')
@@ -20,18 +25,19 @@ const PostComponent = () => {
       {post.map((post) => (
         <div key={post.id} className="border-b border-gray-200 pb-6 last:border-0 last:pb-0">
           <h3 className="text-lg font-medium text-gray-900">
-            <Link to={`/posts/${post.id}`} className="hover:text-indigo-600">
               {post.title}
-            </Link>
           </h3>
-          <p className="mt-1 text-sm text-gray-600">{post.description}</p>
           <div className="mt-2 flex items-center text-sm text-gray-500">
-            <span>{post.date}</span>
-            <span className="mx-2">•</span>
-            <Link to={`/posts/${post.id}`} className="text-indigo-600 hover:text-indigo-500">
-              Read more
-            </Link>
+            <span>{post.date}</span>             
           </div>
+          <p className="mt-1 text-sm text-gray-600">{post.description.substring(0, 200)} ....
+            <button 
+              onClick={()=> readMore(post.id)}
+              className="ml-1 text-indigo-600 hover:text-indigo-800 text-sm font-medium"
+            >
+              Read More
+            </button>
+          </p>
         </div>
       ))}
     </div>

@@ -1,4 +1,3 @@
-import { Link } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
 import PostComponent from '../components/PostComponent';
 
@@ -42,16 +41,6 @@ const Home = () => {
         <div className="bg-white shadow rounded-lg p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Recent Posts</h2>
           <PostComponent/>
-        </div>
-
-        {/* Back to Dashboard Link */}
-        <div className="mt-6 text-center">
-          <Link
-            to="/dashboard" 
-            className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-          >
-            ← Back to Dashboard
-          </Link>
         </div>
       </div>
     </div>
