@@ -1,34 +1,37 @@
 import './App.css'
-import Login from './pages/Login'
-import Home from './pages/Home'
 import { Route, Routes } from 'react-router';
-import Register from './pages/Register';
-import PostDetails from './pages/PostDetails';
-import AdminDashboard from './pages/AdminDashboard';
 import { ProtectedRoute } from './components/ProtectedRoutes';
+import { lazy, Suspense } from 'react';
+
+const AdminPanel = lazy(() => import('./pages/AdminDashboard'))
+const UserDashboard = lazy(() => import('./pages/Home'))
+const Login = lazy(() => import('./pages/Login'))
+const SeePost = lazy(() => import('./pages/PostDetails'))
+const Register = lazy(()=> import('./pages/Register')) 
 
 function App() {
   return (
      <>
-     <Routes>
-        <Route path='/' element={<Login/>}/>
-        <Route path='/home' element= {<Home/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/post/:id' element={<PostDetails/>}/>
+     <Suspense fallback={<div> Loading......</div>}>
+      <Routes>
+          <Route path='/' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+          <Route path='/login' element={<Login/>}/>
 
-        <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
-          <Route path="/dashboard" element={<AdminDashboard />} />
-        </Route>
-                    
-        <Route element={<ProtectedRoute allowedRoles={['User']} />}>
-            <Route path="/home" element={<Home />} />
-        </Route>
+          <Route element={<ProtectedRoute allowedRoles={['Admin']} />}>
+            <Route path="/dashboard" element={<AdminPanel />} />
+          </Route>
+                      
+          <Route element={<ProtectedRoute allowedRoles={['User']} />}>
+              <Route path="/home" element={<UserDashboard />} />
+              <Route path='/post/:id' element={<SeePost/>}/>
+          </Route>
 
-        <Route path='/*' element={<div> 404 </div>}/>
-        <Route path='/unauthorized' element={<div> Unauthorized</div>}/>
-        
-     </Routes>
+          <Route path='/*' element={<div> 404 </div>}/>
+          <Route path='/unauthorized' element={<div> Unauthorized</div>}/>
+          
+      </Routes>
+     </Suspense>
      </>
   )
 }
