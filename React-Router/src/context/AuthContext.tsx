@@ -7,6 +7,8 @@ type AuthContextType = {
     setUsername: (username: string) => void;
     password:string;
     setPassword: (password: string) => void;
+    role: string;
+    setRole: (role: string) => void;
     login: () => void;
     isAuthenticated: () => boolean;
     logout: () => void;
@@ -23,9 +25,11 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
     const [user, setUser] = useState<string | null>(null);
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [role, setRole] = useState<string | null>("");
 
     const login = () => {
         setUser(username);
+        setRole(role);
     }
 
     const isAuthenticated = () => {
@@ -37,10 +41,24 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
         setUser(null);
         setUsername("");
         setPassword("");
+        setRole("");
     }
 
     return(
-        <AuthContext.Provider value={{username, setUsername, password, setPassword, user, setUser, login, isAuthenticated, logout }}>
+        <AuthContext.Provider
+        value={{
+            username,
+            setUsername,
+            password,
+            setPassword,
+            user,
+            setUser, 
+            role,
+            setRole,
+            login,
+            isAuthenticated,
+            logout
+        }}>
             {children}
         </AuthContext.Provider>
     );
