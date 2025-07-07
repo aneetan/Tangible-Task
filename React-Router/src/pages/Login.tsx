@@ -1,9 +1,8 @@
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
 
 const Login = () => {
   const {username, password, setUsername, setPassword, role, setRole, login} = useAuth();
-  const navigate = useNavigate();
 
   const handleLogin = (e:React.FormEvent) => {
     e.preventDefault();
