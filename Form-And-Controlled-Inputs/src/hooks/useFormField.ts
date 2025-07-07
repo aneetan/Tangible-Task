@@ -23,7 +23,6 @@ const useFormField =  <T extends string | number | boolean | readonly string[]>(
 
     const error = touched ? validate(value) : '';
 
-     // Handle field changes
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const newValue = e.target.value as T;
         setValue(newValue);
