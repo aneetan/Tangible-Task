@@ -1,5 +1,5 @@
+import { useAuth } from '../context/auth/useAuth';
 import { useTheme } from '../context/theme/useTheme';
-import { useAuth } from '../hooks/useAuth';
 
 const Login = () => {
 

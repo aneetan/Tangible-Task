@@ -1,9 +1,7 @@
-import { useContext, useState } from 'react'
 import './App.css'
 import Login from './pages/Login'
 import Home from './pages/Home'
-import { AuthContext } from './context/AuthContext'
-import { useAuth } from './hooks/useAuth'
+import { useAuth } from './context/auth/useAuth';
 
 function App() {
   const {isAuthenticated} = useAuth();

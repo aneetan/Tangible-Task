@@ -1,4 +1,4 @@
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from "../context/auth/useAuth";
 
 const Home = () => {
     const {user, logout} = useAuth();
