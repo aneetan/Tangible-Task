@@ -3,6 +3,7 @@ import './App.css'
 import Counter from './components/Counter'
 import HomeSection from './pages/HomeSection'
 import Toggle from './components/Toggle'
+import MultiStepForm from './pages/MultiStepForm'
 
 function App() {
 
@@ -13,6 +14,8 @@ function App() {
         <Route path='/' element={<HomeSection/>} />
         <Route path='/counter' element={<Counter/>} />
         <Route path='/toggle' element={<Toggle/>} />
+        <Route path='/form' element={<MultiStepForm/>} />
+
 
       </Routes>
     </BrowserRouter>
