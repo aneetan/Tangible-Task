@@ -4,6 +4,7 @@ import Counter from './components/Counter'
 import HomeSection from './pages/HomeSection'
 import Toggle from './components/Toggle'
 import MultiStepForm from './pages/MultiStepForm'
+import TimerComponent from './components/TimerComponent'
 
 function App() {
 
@@ -15,8 +16,7 @@ function App() {
         <Route path='/counter' element={<Counter/>} />
         <Route path='/toggle' element={<Toggle/>} />
         <Route path='/form' element={<MultiStepForm/>} />
-
-
+        <Route path='/timer' element={<TimerComponent/>} />
       </Routes>
     </BrowserRouter>
        
