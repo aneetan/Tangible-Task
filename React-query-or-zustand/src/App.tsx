@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router'
+import PostList from './pages/PostList'
 
 function App() {
 
@@ -7,7 +8,7 @@ function App() {
     <>
        <BrowserRouter>
        <Routes>
-          <Route path="/" element={<div> Hi </div>} />
+          <Route path="/" element={<PostList/>} />
        </Routes>
        </BrowserRouter>
     </>
