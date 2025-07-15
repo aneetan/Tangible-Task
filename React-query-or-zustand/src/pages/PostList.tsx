@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import useFakeQuery from '../hooks/useFakeQuery';
 import { BeatLoader } from 'react-spinners';
+import AddPostForm from '../components/AddPostForm';
+import EditButton from '../components/EditButton';
 
-type PostData = {
-    id: number;
+ export type PostData = {
+    id: string;
     name: string;
     email: string;
     body: string;
@@ -11,6 +14,11 @@ type PostData = {
 
 const PostList = () => {
   const { data, isLoading, error, refetch } = useFakeQuery<PostData>('http://localhost:3000/posts');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const openModal = () => setIsOpen(true);
+
+  const closeModal = () => setIsOpen(false);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -27,7 +35,7 @@ const PostList = () => {
 
             <button
             disabled={isLoading}
-            onClick={refetch}
+            onClick={openModal}
             className={` flex px-4 py-2 rounded-md font-medium transition-colors ${
                 isLoading
                 ? 'bg-gray-300 cursor-not-allowed'
@@ -39,19 +47,6 @@ const PostList = () => {
         </div>
       </div>
 
-      {/* Error state */}
-      {error && (
-        <div className="mb-6 p-4 bg-red-50 rounded-lg border border-red-200">
-          <p className="text-red-600 font-medium">Error: {error}</p>
-          <button
-            onClick={refetch}
-            className="mt-2 px-3 py-1 bg-red-600 text-white rounded-md text-sm hover:bg-red-700 transition-colors"
-          >
-            Retry
-          </button>
-        </div>
-      )}
-
       {/* Loading state */}
       {isLoading && !error && (
         <div className="flex justify-center items-center h-64">
@@ -59,7 +54,6 @@ const PostList = () => {
         </div>
       )}
 
-      {/* Posts grid */}
       {!isLoading && !error && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.map((post) => (
@@ -67,7 +61,7 @@ const PostList = () => {
               key={post.id}
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
             >
-              <div className="p-6">
+              <div className="p-4">
                 <h3 className="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">
                   {post.name}
                 </h3>
@@ -75,13 +69,22 @@ const PostList = () => {
                   <span>Email: {post.email}</span>
                 </div>
                 <p className="text-gray-600 mb-4 line-clamp-3">{post.body}</p>
+                 <div className='flex flex-start gap-3'>
+                  <EditButton postData={post}/>
+                  <button
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200
+                  focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
+              
             </article>
           ))}
         </div>
       )}
 
-      {/* Empty state (optional) */}
       {!isLoading && !error && data.length === 0 && (
         <div className="text-center py-12">
           <p className="text-gray-500">No posts available</p>
@@ -93,6 +96,21 @@ const PostList = () => {
           </button>
         </div>
       )}
+
+
+
+      {isOpen && (
+         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-black/50 bg-opacity-50 backdrop-blur-sm"
+            onClick={closeModal}
+          />
+          <div className="relative z-10 w-full max-w-md bg-white rounded-xl shadow-xl">
+            <AddPostForm closeModal={closeModal} isEdit={false}/>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
