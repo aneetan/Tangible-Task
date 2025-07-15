@@ -13,12 +13,6 @@
       "body": "Exploring the new features in cript ES2022. The class fields are game changers!"
     },
     {
-      "id": "3",
-      "name": "Alex Johnson",
-      "email": "alex.j@example.com",
-      "body": "Just deployed my new portfolio website built with Next.js and Tailwind CSS."
-    },
-    {
       "id": "4",
       "name": "Maria Garcia",
       "email": "maria.g@example.com",
@@ -35,36 +29,6 @@
       "name": "Sarah Wilson",
       "email": "sarah.w@example.com",
       "body": "Writing a technical article about state management in large React applications."
-    },
-    {
-      "id": "7",
-      "name": "Michael Brown",
-      "email": "michael.b@example.com",
-      "body": "Just completed a full-stack project with Node.js, Express, and MongoDB."
-    },
-    {
-      "id": "8",
-      "name": "Emily Davis",
-      "email": "emily.d@example.com",
-      "body": "Learning Script and loving the type safety it brings to my JavaScript code."
-    },
-    {
-      "id": "8",
-      "name": "Anita Neupane",
-      "email": "admin@gmail.com",
-      "body": "Hello this is added post"
-    },
-    {
-      "id": "3",
-      "name": "New Post",
-      "email": "admin@gmail.com",
-      "body": "Newwwwwwwwwwwwwwwwwwwww\n"
-    },
-    {
-      "id": "415042",
-      "name": "Bini Neupane",
-      "email": "anitaneupane2061@gmail.com",
-      "body": "000"
     }
   ]
 }

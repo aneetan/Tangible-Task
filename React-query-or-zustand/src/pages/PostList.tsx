@@ -3,6 +3,7 @@ import useFakeQuery from '../hooks/useFakeQuery';
 import { BeatLoader } from 'react-spinners';
 import AddPostForm from '../components/AddPostForm';
 import EditButton from '../components/EditButton';
+import DeleteButton from '../components/DeleteButton';
 
  export type PostData = {
     id: string;
@@ -71,12 +72,7 @@ const PostList = () => {
                 <p className="text-gray-600 mb-4 line-clamp-3">{post.body}</p>
                  <div className='flex flex-start gap-3'>
                   <EditButton postData={post}/>
-                  <button
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200
-                  focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-                  >
-                    Delete
-                  </button>
+                  <DeleteButton postData={post}/>
                 </div>
               </div>
               
