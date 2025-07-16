@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useState } from "react";
 import type { PostData } from "../pages/PostList"
 
 interface FormProps {

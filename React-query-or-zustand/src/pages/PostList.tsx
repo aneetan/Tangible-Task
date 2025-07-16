@@ -4,7 +4,6 @@ import { BeatLoader } from 'react-spinners';
 import AddPostForm from '../components/AddPostForm';
 import EditButton from '../components/EditButton';
 import DeleteButton from '../components/DeleteButton';
-import { useFilteredItems, useListActions, usePostCounts } from '../hooks/zustandHooks';
 import { useListStore } from '../store/createListStore';
 
  export type PostData = {
