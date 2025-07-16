@@ -1,4 +1,3 @@
-import React from 'react'
 import useToggle from '../hooks/useToggle'
 
 const Toggle = () => {

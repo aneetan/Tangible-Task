@@ -1,8 +1,8 @@
-export enum Steps {
-    USER_INFO = "user_info",
-    ADDRESS = "address",
-    REVIEW = "review"
-}
+export const Steps = {
+    USER_INFO: "user_info",
+    ADDRESS: "address",
+    REVIEW: "review"
+} as const;
 
 export interface FormDataProps {
     name: string;
