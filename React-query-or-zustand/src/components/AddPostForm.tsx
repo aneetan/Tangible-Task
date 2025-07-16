@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { PostData } from "../pages/PostList"
+import { useListStore } from "../store/createListStore";
 
 interface FormProps {
     closeModal: () => void;
@@ -10,6 +11,7 @@ interface FormProps {
 
 
 const AddPostForm: React.FC<FormProps> = ({closeModal, isEdit = false, initialData}) => {
+    const { addItem, updateItem } = useListStore();
     const generateRandomId = () => Math.floor(Math.random() * 1000000);
     const [data, setData] = useState<PostData>( initialData || {
         id: generateRandomId().toString(),  
@@ -54,6 +56,12 @@ const AddPostForm: React.FC<FormProps> = ({closeModal, isEdit = false, initialDa
                 throw new Error('Failed to submit post');
             }
 
+            if(isEdit){
+                updateItem(data.id, data);
+            } else {
+                addItem(data);
+            }
+
             if (!isEdit) {
                 setData({
                     id: generateRandomId().toString(),
@@ -63,6 +71,7 @@ const AddPostForm: React.FC<FormProps> = ({closeModal, isEdit = false, initialDa
                     status: ''
                 });
             }
+
             closeModal();
         } catch (err) {
             console.log(err);

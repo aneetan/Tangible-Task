@@ -8,6 +8,9 @@ interface ListStore {
     filter: Filter;
     setFilter: (filter: Filter) => void;
     setItems: (items: PostData[]) => void;
+    addItem: (items: PostData) => void;
+    updateItem: (id: string, updates: Partial<PostData>) => void;
+    deleteItem: (id: string) => void;
     getFilteredItems: () => PostData[];
     getCounts: () => {
         total: number;
@@ -22,6 +25,20 @@ interface ListStore {
 
     setFilter: (filter) => set({filter}),
     setItems: (items) => set({items}),
+
+    addItem: (item) => set(state => ({ items: [...state.items, item] })),
+    
+    updateItem: (id, updates) => 
+        set(state => ({
+            items: state.items.map(item => 
+                item.id === id ? { ...item, ...updates } : item
+            )
+        })),
+
+    deleteItem: (id) => 
+        set(state => ({
+            items: state.items.filter(item => item.id !== id)
+        })),
 
     getFilteredItems: () => {
         const { items, filter } = get();

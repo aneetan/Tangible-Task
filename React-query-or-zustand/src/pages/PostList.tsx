@@ -19,10 +19,12 @@ const PostList = () => {
   const { data, isLoading, error, refetch } = useFakeQuery<PostData>('http://localhost:3000/posts');
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const {filter, setItems, getFilteredItems, getCounts, setFilter} = useListStore();
-
-  useEffect(()=> {
-    setItems(data);
-  }, [data])
+  
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setItems(data);
+    }
+  }, [data, setItems]);
 
   const openModal = () => setIsOpen(true);
 

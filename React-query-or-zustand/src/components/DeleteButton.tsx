@@ -1,11 +1,14 @@
 import { useState} from "react";
 import type { PostData } from "../pages/PostList";
+import { useListStore } from "../store/createListStore";
 
 interface DeleteProps{
     postData: PostData;
 }
 const DeleteButton: React.FC<DeleteProps> = ({postData}) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const { deleteItem } = useListStore();
+    
 
     const openModal = () => {
         setIsModalOpen(true)
@@ -30,6 +33,7 @@ const DeleteButton: React.FC<DeleteProps> = ({postData}) => {
                 throw new Error('Failed to submit post');
             }
 
+            deleteItem(postData.id);
             closeModal();
         } catch (err) {
             console.log(err);
