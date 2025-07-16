@@ -2,14 +2,14 @@ import { useEffect, useReducer, useRef } from "react";
 
 type TimerState = {
     isPlaying: boolean;
-    time: number;
+    time: number; //number of seconds passed
 }
 
 export type Action = 
 | {type: 'START'}
 | {type: 'PAUSE'}
 | {type: 'RESET'}
-| {type: 'TICK'}
+| {type: 'TICK'}  //Increase the time by 1 second
 
 export const initialState: TimerState = {
   time: 0,
