@@ -1,30 +1,77 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useFakeQuery from '../hooks/useFakeQuery';
 import { BeatLoader } from 'react-spinners';
 import AddPostForm from '../components/AddPostForm';
 import EditButton from '../components/EditButton';
 import DeleteButton from '../components/DeleteButton';
+import { useFilteredItems, useListActions, usePostCounts } from '../hooks/zustandHooks';
+import { useListStore } from '../store/createListStore';
 
  export type PostData = {
     id: string;
     name: string;
     email: string;
     body: string;
+    status: string;
 }
 
 
 const PostList = () => {
   const { data, isLoading, error, refetch } = useFakeQuery<PostData>('http://localhost:3000/posts');
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const {filter, setItems, getFilteredItems, getCounts, setFilter} = useListStore();
+
+  useEffect(()=> {
+    setItems(data);
+  }, [data])
 
   const openModal = () => setIsOpen(true);
 
   const closeModal = () => setIsOpen(false);
 
+  const filteredItems = getFilteredItems();
+  const counts = getCounts();
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <h2 className="text-2xl font-bold text-gray-800">Latest Posts</h2>
+
+        <div className="flex gap-2">
+          <button
+            onClick={() => setFilter('all')}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              filter === 'all'
+                ? 'bg-gray-500 text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            All ({counts.total})
+          </button>
+          
+          <button
+            onClick={() => setFilter('active')}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              filter === 'active'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            Active ({counts.active})
+          </button>
+          
+          <button
+            onClick={() => setFilter('completed')}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              filter === 'completed'
+                ? 'bg-green-600 text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            Completed ({counts.completed})
+          </button>
+        </div>
+
         <div className='flex justify-between items-center'>
             <button
             onClick={refetch}
@@ -57,7 +104,7 @@ const PostList = () => {
 
       {!isLoading && !error && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data.map((post) => (
+          {filteredItems.map((post) => (
             <article
               key={post.id}
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
@@ -68,6 +115,15 @@ const PostList = () => {
                 </h3>
                  <div className="flex items-center text-sm text-gray-500">
                   <span>Email: {post.email}</span>
+                </div>
+                <div className={`inline-flex my-2 capitalize text-xs font-medium px-2.5 py-0.5 rounded-full ${
+                  post.status === 'completed' 
+                    ? 'bg-green-100 text-green-800' 
+                    : post.status === 'active' 
+                      ? 'bg-blue-100 text-blue-800' 
+                      : 'bg-gray-100 text-gray-800'
+                }`}>
+                  {post.status}
                 </div>
                 <p className="text-gray-600 mb-4 line-clamp-3">{post.body}</p>
                  <div className='flex flex-start gap-3'>

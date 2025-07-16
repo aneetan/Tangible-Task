@@ -16,6 +16,7 @@ const AddPostForm: React.FC<FormProps> = ({closeModal, isEdit = false, initialDa
         name: '',
         email: '',
         body:'',
+        status: ''
     })
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -43,7 +44,10 @@ const AddPostForm: React.FC<FormProps> = ({closeModal, isEdit = false, initialDa
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({
+                    ...data,
+                    status: "active"
+                }),
             });
 
             if (!response.ok) {
@@ -56,6 +60,7 @@ const AddPostForm: React.FC<FormProps> = ({closeModal, isEdit = false, initialDa
                     name: '',
                     email: '',
                     body: '',
+                    status: ''
                 });
             }
             closeModal();

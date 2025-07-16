@@ -4,31 +4,36 @@
       "id": "1",
       "name": "John Doe",
       "email": "john.doe@example.com",
-      "body": "This is my first post about web development and React hooks."
+      "body": "This is my first post about web development and React hooks.",
+      "status": "completed"
     },
     {
       "id": "2",
       "name": "Jane Smith",
       "email": "jane.smith@example.com",
-      "body": "Exploring the new features in cript ES2022. The class fields are game changers!"
+      "body": "Exploring the new features in cript ES2022. The class fields are game changers!",
+      "status": "completed"
     },
     {
       "id": "4",
       "name": "Maria Garcia",
       "email": "maria.g@example.com",
-      "body": "Working on a new open-source project for UI components. Contributors welcome!"
+      "body": "Working on a new open-source project for UI components. Contributors welcome!",
+      "status": "completed"
     },
     {
       "id": "5",
       "name": "David Kim",
       "email": "david.kim@example.com",
-      "body": "Today I learned about React's concurrent features. The new suspense API is amazing."
+      "body": "Today I learned about React's concurrent features. The new suspense API is amazing.",
+      "status": "active"
     },
     {
       "id": "6",
       "name": "Sarah Wilson",
       "email": "sarah.w@example.com",
-      "body": "Writing a technical article about state management in large React applications."
+      "body": "Writing a technical article about state management in large React applications.",
+      "status": "active"
     }
   ]
 }
